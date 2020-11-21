@@ -40,7 +40,7 @@
 		if (isLogin){	
 			session.setAttribute("id", user_id);
 			session.setAttribute("pw", user_pw);
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("main.jsp");
 		}
 		
 		// if there's no user_info, print Login Failed...
