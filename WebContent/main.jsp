@@ -64,7 +64,7 @@
         	<th> 화자 </th> <td> <input id="add_sayer" name="add_sayer"> </td>
         </tr>
         <tr>
-        	<th> 한줄평 </th> <td> <input id="add_comment" name="add comment"> </td>
+        	<th> 한줄평 </th> <td> <input id="add_comment" name="add_comment"> </td>
         </tr>
     </table>
     <button> 추가하기 </button>
@@ -86,7 +86,7 @@
 		Connection conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 		
 		Statement st = conn.createStatement();
-        String query = "select *, ifnull(comment, 'x') from phrase where user_ID = '" + phrase_id + "'";
+        String query = "select * from phrase NATURAL JOIN source where user_ID = '" + phrase_id + "'";
         ResultSet rs = st.executeQuery(query);
 		
         if (!rs.next()){
@@ -98,11 +98,11 @@
         
         while (rs.next()){
         	String new_phrase = rs.getString("phrase");
-        	String new_category = rs.getString("category");
+        	String new_sayer = rs.getString("sayer");
         	String new_comment = rs.getString("comment");
         	
         	out.println("<br> phrase : " + new_phrase + 
-        			"\t | \tcategory : " + new_category +
+        			"\t | \tsayer : " + new_sayer +
         			"\t | \tcomment : " + new_comment);
         }
 		

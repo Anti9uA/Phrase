@@ -39,14 +39,14 @@
         
         //------ source 테이블에 데이터 추가 (타임 스탬프, 매체 종류, 매체명, 화자) ------	
         String source_query = "INSERT INTO source VALUES (now(), '" + add_media + 
-                "','" + add_mediaName +
                 "','" + add_sayer +
+                "','" + add_mediaName +
                 "')";
         
         st.executeUpdate(source_query);
         
         //------ 한줄평을 작성 안한 경우 null 값이 들어가는걸 '없음'으로 수정해줌 ------	
-        String update_null_query = "UPDATE phrase SET comment = '없음' WHERE comment = 'null'";
+        String update_null_query = "UPDATE phrase SET comment = '없음' WHERE comment = ' '";
         st.executeUpdate(update_null_query);
         
         
