@@ -17,6 +17,9 @@
 	</form>
 	<br />
 	
+	<!-- @@@@@@@@@@@ 명언 검색 창 @@@@@@@@@@@ -->
+	<button onClick="location.href='search.jsp'"> 명언 검색 </button>
+	
 	<!-- @@@@@@@@@@@ 명언 추가 창 @@@@@@@@@@@ -->
 	<h2> 띵언 추가 </h2>
     <form action="phrase_add.jsp" method="post" onsubmit="return input_check_func()">
@@ -45,11 +48,11 @@
 	            <td> 
 	            <select id="add_media" name="add_media">
 			        	<option value="drama">드라마</option>
-			        	<option value="movie">노력</option>
-			        	<option value="anime">우정</option>
-			        	<option value="song">우정</option>
-			        	<option value="book">자립</option>
-			        	<option value="person">겸손</option>
+			        	<option value="movie">영화</option>
+			        	<option value="anime">만화</option>
+			        	<option value="song">노래</option>
+			        	<option value="book">책</option>
+			        	<option value="person">인물</option>
 			        	<option value="Idiom">속담/사자성어</option>
 		        	</select> 
 	            </td>
