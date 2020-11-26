@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.sql.*" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@
            <button> 검색 </button>
            </form> <br/>
             
-       <table width="50%" border="1">
+       <table width="100%" border="1">
        	<tr>
        		<td> 명언 </td>
        		<td> 사용자 </td>

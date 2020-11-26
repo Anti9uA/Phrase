@@ -72,7 +72,16 @@
     
     <!-- @@@@@@@@@@@ 내가 추가한 명언 조 @@@@@@@@@@@ -->
     <h3> 내가 추가한 띵언 </h3>
-    
+    <table width="100%" border="1">
+       	<tr>
+       		<td> 명언 </td>
+       		<td> 사용자 </td>
+       		<td> 분야 </td>
+       		<td> 매체</td>
+       		<td> 매체명 </td>
+       		<td> 인물 </td>
+       		<td> 한줄평 </td>
+       	<tr>
     <%
 	try {
 		String phrase_id = (String)session.getAttribute("id");
@@ -97,13 +106,21 @@
         }
         
         while (rs.next()){
-        	String new_phrase = rs.getString("phrase");
-        	String new_sayer = rs.getString("sayer");
-        	String new_comment = rs.getString("comment");
-        	
-        	out.println("<br> phrase : " + new_phrase + 
-        			"\t | \tsayer : " + new_sayer +
-        			"\t | \tcomment : " + new_comment);
+        	%> 
+    		<tr>
+    			<td> <%=rs.getString("phrase")%></td>
+    			<td> <%=rs.getString("user_ID")%></td>
+    			<td> <%=rs.getString("category")%></td>
+    			<td> <%=rs.getString("media")%></td>
+    			<td> <%=rs.getString("media_name")%></td>
+    			<td> <%=rs.getString("sayer")%></td>
+    			<td> <%=rs.getString("comment")%></td>
+    			<td>
+    				<a href ="<%request.getContextPath(); %>
+    				phrase_delete.jsp?send_phrase=<%=rs.getString("phrase")%>">delete</a>
+    			</td>
+    		</tr>
+    		<%
         }
 		
 	} catch (Exception e) {
@@ -115,7 +132,7 @@
 	}
     
 	%>
-	
+	</table>
 	<!-- @@@@@@@@@@@ 명언 추가시 아무것도 입력 안한 경우 진행 안되고 alert 표시해주는 자바 스크립트 함수 @@@@@@@@@@@ -->
 	<script>
 	function input_check_func(){
@@ -140,6 +157,6 @@
 		}
 	}
 	</script>
-	
+
 </body>
 </html>

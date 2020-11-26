@@ -8,7 +8,8 @@
 </head>
 <body>
 	<h1> 회원가입 </h1>
-	<br />
+	<button onClick="location.href='login.jsp'"> 가입창으로.. </button> 
+	<br/><br/>
 	<h1> 회원정보 입력</h1>
 	<form action="register.jsp" method="post" onsubmit="return signup_check()">
 		<br /> ID: <input id="signup_id" name="signup_id" type="text">

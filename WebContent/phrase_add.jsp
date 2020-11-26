@@ -30,15 +30,16 @@
 		
 		//------ phrase 테이블에 데이터 추가 (타임 스탬프, 띵언, 분야, 사용자 아이디, 한줄평) ------	
 		Statement st = conn.createStatement();
-        String phrase_query = "INSERT INTO phrase VALUES (now(), '" + add_phrase + 
+        String phrase_query = "INSERT INTO phrase VALUES ('" + add_phrase + 
                 "','" + add_category + 
                 "','" + add_ID +
                 "','" + add_comment +
-                "')";
+                "', 000, 'yes')"; 
         st.executeUpdate(phrase_query);
         
         //------ source 테이블에 데이터 추가 (타임 스탬프, 매체 종류, 매체명, 화자) ------	
-        String source_query = "INSERT INTO source VALUES (now(), '" + add_media + 
+        String source_query = "INSERT INTO source VALUES (now(), '" + add_phrase +
+        		"','" + add_media +
                 "','" + add_sayer +
                 "','" + add_mediaName +
                 "')";
