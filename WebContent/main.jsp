@@ -31,15 +31,15 @@
             <th> 분야 </th> 
 	            <td> 
 		            <select id="add_category" name="add_category">
-			        	<option value="love">사랑</option>
-			        	<option value="effort">노력</option>
-			        	<option value="comfort">우정</option>
-			        	<option value="boost">자립</option>
-			        	<option value="humble">겸손</option>
-			        	<option value="life">인생</option>
-			        	<option value="time">시간</option>
-			        	<option value="conscience">양심</option>
-			        	<option value="humanity">인륜</option>
+			        	<option value="사랑">사랑</option>
+			        	<option value="노력">노력</option>
+			        	<option value="우정">우정</option>
+			        	<option value="자립">자립</option>
+			        	<option value="겸손">겸손</option>
+			        	<option value="인생">인생</option>
+			        	<option value="시간">시간</option>
+			        	<option value="양심">양심</option>
+			        	<option value="인륜">인륜</option>
 		        	</select>
 	            </td>
         </tr>
@@ -47,13 +47,13 @@
             <th> 매체 </th> 
 	            <td> 
 	            <select id="add_media" name="add_media">
-			        	<option value="drama">드라마</option>
-			        	<option value="movie">영화</option>
-			        	<option value="anime">만화</option>
-			        	<option value="song">노래</option>
-			        	<option value="book">책</option>
-			        	<option value="person">인물</option>
-			        	<option value="Idiom">속담/사자성어</option>
+			        	<option value="드라마">드라마</option>
+			        	<option value="영화">영화</option>
+			        	<option value="만화">만화</option>
+			        	<option value="노래">노래</option>
+			        	<option value="책">책</option>
+			        	<option value="인물">인물</option>
+			        	<option value="속담/사자성어">속담/사자성어</option>
 		        	</select> 
 	            </td>
         </tr>
@@ -117,7 +117,11 @@
     			<td> <%=rs.getString("comment")%></td>
     			<td>
     				<a href ="<%request.getContextPath(); %>
-    				phrase_delete.jsp?send_phrase=<%=rs.getString("phrase")%>">delete</a>
+    				phrase_delete.jsp?send_phrase=<%=rs.getString("phrase")%>">삭제</a>
+    			</td>
+    			<td>
+    				<a href ="<%request.getContextPath(); %>
+    				update.jsp?send_phrase=<%=rs.getString("phrase")%>">수정</a>
     			</td>
     		</tr>
     		<%
@@ -130,9 +134,9 @@
 		history.go(-1); 
 		</script> <% 
 	}
-    
 	%>
 	</table>
+	
 	<!-- @@@@@@@@@@@ 명언 추가시 아무것도 입력 안한 경우 진행 안되고 alert 표시해주는 자바 스크립트 함수 @@@@@@@@@@@ -->
 	<script>
 	function input_check_func(){

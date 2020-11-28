@@ -29,7 +29,7 @@
         
       //------ phrase 테이블에 데이터 삭제 (타임 스탬프, 띵언, 분야, 사용자 아이디, 한줄평) ------	
         String delete_query2 = "DELETE FROM source WHERE phrase = '" + delete_phrase + "'";
-        st.executeUpdate(delete_query);
+        st.executeUpdate(delete_query2);
         
 		response.sendRedirect("main.jsp");
 		

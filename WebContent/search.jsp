@@ -29,7 +29,7 @@
            <button> 검색 </button>
            </form> <br/>
             
-       <table width="100%" border="1">
+       <table width="80%" border="1">
        	<tr>
        		<td> 명언 </td>
        		<td> 사용자 </td>

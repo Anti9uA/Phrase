@@ -39,6 +39,7 @@
         
         //------ source 테이블에 데이터 추가 (타임 스탬프, 매체 종류, 매체명, 화자) ------	
         String source_query = "INSERT INTO source VALUES (now(), '" + add_phrase +
+        		"','" + add_ID +
         		"','" + add_media +
                 "','" + add_sayer +
                 "','" + add_mediaName +
