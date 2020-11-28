@@ -47,7 +47,8 @@
 		else {
             %> <script> alert("Login Failed.."); history.go(-1); </script> <%            
         }
-		
+		pstmt.close();
+		conn.close();
     } catch (Exception e) {
     	e.printStackTrace();
         out.println("DB Connection Failed..");

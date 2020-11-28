@@ -57,7 +57,7 @@
 		// ---- Secure coding to prevent sql injection ----
 		String query = "Select * FROM phrase NATURAL JOIN source WHERE " 
 				+ search_cat + 
-                " = ? order by " + search_cat;
+                " = ? AND share = 'yes' order by " + search_cat;
 		PreparedStatement stmt = conn.prepareStatement(query);
 		stmt.setString(1, input_search);
         ResultSet rs = stmt.executeQuery();

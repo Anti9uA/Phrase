@@ -6,82 +6,78 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="meta_css.html" %>
 <title>Main</title>
 </head>
 <body>
-	<h2> 메인 페이지 </h2>
-	<% out.print(new_id + "님 환영합니다!"); %>	 
-    <form action="logout.jsp" method="post">
-    <br />
-    <br /> <button> 로그아웃 </button>
-	</form>
-	<br />
-	
-	<!-- @@@@@@@@@@@ 명언 검색 창 @@@@@@@@@@@ -->
-	<button onClick="location.href='search.jsp'"> 명언 검색 </button>
-	
-	<!-- @@@@@@@@@@@ 명언 추가 창 @@@@@@@@@@@ -->
-	<h2> 띵언 추가 </h2>
-    <form action="phrase_add.jsp" method="post" onsubmit="return input_check_func()">
-    <table border="1">
-        <tr>
-            <th> 띵언 </th> <td> <input id="add_phrase" name="add_phrase"> </td>
-        </tr>
-        <tr>
-            <th> 분야 </th> 
-	            <td> 
-		            <select id="add_category" name="add_category">
-			        	<option value="사랑">사랑</option>
-			        	<option value="노력">노력</option>
-			        	<option value="우정">우정</option>
-			        	<option value="자립">자립</option>
-			        	<option value="겸손">겸손</option>
-			        	<option value="인생">인생</option>
-			        	<option value="시간">시간</option>
-			        	<option value="양심">양심</option>
-			        	<option value="인륜">인륜</option>
-		        	</select>
-	            </td>
-        </tr>
-        <tr>
-            <th> 매체 </th> 
-	            <td> 
-	            <select id="add_media" name="add_media">
-			        	<option value="드라마">드라마</option>
-			        	<option value="영화">영화</option>
-			        	<option value="만화">만화</option>
-			        	<option value="노래">노래</option>
-			        	<option value="책">책</option>
-			        	<option value="인물">인물</option>
-			        	<option value="속담/사자성어">속담/사자성어</option>
-		        	</select> 
-	            </td>
-        </tr>
-        <tr>
-        	<th> 매체명 </th> <td> <input id="add_mediaName" name="add_mediaName"> </td>
-        </tr>
-        <tr>
-        	<th> 화자 </th> <td> <input id="add_sayer" name="add_sayer"> </td>
-        </tr>
-        <tr>
-        	<th> 한줄평 </th> <td> <input id="add_comment" name="add_comment"> </td>
-        </tr>
-    </table>
-    <button> 추가하기 </button>
-    </form>
-    
-    <!-- @@@@@@@@@@@ 내가 추가한 명언 조 @@@@@@@@@@@ -->
-    <h3> 내가 추가한 띵언 </h3>
-    <table width="100%" border="1">
-       	<tr>
-       		<td> 명언 </td>
-       		<td> 사용자 </td>
-       		<td> 분야 </td>
-       		<td> 매체</td>
-       		<td> 매체명 </td>
-       		<td> 인물 </td>
-       		<td> 한줄평 </td>
-       	<tr>
+	<%@ include file="header.jsp" %>
+       	<div class="container" style="width: 90%; margin: auto;">
+		
+		<!-- @@@@@@@@@@@ 명언 추가 창 @@@@@@@@@@@ -->
+		<h2 align="center"> 띵언 추가 </h2>
+	    <form action="phrase_add.jsp" method="post" onsubmit="return input_check_func()">
+		    <table border="1" style="margin: auto;">
+		        <tr>
+		            <th> 띵언 </th> <td> <input id="add_phrase" name="add_phrase"> </td>
+		        </tr>
+		        <tr>
+		            <th> 분야 </th> 
+			            <td> 
+				            <select id="add_category" name="add_category">
+					        	<option value="사랑">사랑</option>
+					        	<option value="노력">노력</option>
+					        	<option value="우정">우정</option>
+					        	<option value="자립">자립</option>
+					        	<option value="겸손">겸손</option>
+					        	<option value="인생">인생</option>
+					        	<option value="시간">시간</option>
+					        	<option value="양심">양심</option>
+					        	<option value="인륜">인륜</option>
+				        	</select>
+			            </td>
+		        </tr>
+		        <tr>
+		            <th> 매체 </th> 
+			            <td> 
+			            <select id="add_media" name="add_media">
+					        	<option value="드라마">드라마</option>
+					        	<option value="영화">영화</option>
+					        	<option value="만화">만화</option>
+					        	<option value="노래">노래</option>
+					        	<option value="책">책</option>
+					        	<option value="인물">인물</option>
+					        	<option value="속담/사자성어">속담/사자성어</option>
+				        	</select> 
+			            </td>
+		        </tr>
+		        <tr>
+		        	<th> 매체명 </th> <td> <input id="add_mediaName" name="add_mediaName"> </td>
+		        </tr>
+		        <tr>
+		        	<th> 화자 </th> <td> <input id="add_sayer" name="add_sayer"> </td>
+		        </tr>
+		        <tr>
+		        	<th> 한줄평 </th> <td> <input id="add_comment" name="add_comment"> </td>
+		        </tr>
+		       
+		        <tr>
+	    			<td colspan="2"><input type="submit" value="추가하기" onClick="createPhraseBtn()" id="create-phrase-btn" class="btn btn-primary" align="center" style="width: 100%;"></td>
+	    		</tr>
+		    </table>
+	    </form>
+	    
+	    <!— @@@@@@@@@@@ 내가 추가한 명언 조 @@@@@@@@@@@ —>
+	    <h3 style="margin-top: 75px;"> 내가 추가한 띵언 </h3>
+	    <table width="100%" border="1">
+	       	<tr>
+	       		<td> 명언 </td>
+	       		<td> 사용자 </td>
+	       		<td> 분야 </td>
+	       		<td> 매체</td>
+	       		<td> 매체명 </td>
+	       		<td> 인물 </td>
+	       		<td> 한줄평 </td>
+	       	<tr>
     <%
 	try {
 		String phrase_id = (String)session.getAttribute("id");
@@ -161,6 +157,12 @@
 		}
 	}
 	</script>
-
+	
+	<script>
+			function createPhraseBtn() {
+			  alert("명언이 생성되었습니다.")
+			}
+	</script>
+	
 </body>
 </html>

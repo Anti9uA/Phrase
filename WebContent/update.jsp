@@ -6,10 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="meta_css.html" %>
 <title>Insert title here</title>
 </head>
 <body>
-
+	<%@ include file="header.jsp" %>
 	<%
 	String get_phrase = request.getParameter("send_phrase");
 	String u_phrase = null;
@@ -48,54 +49,57 @@
 		out.println("DB Connection Failed..");
 	}
 	%>
-	<h2> 명언 수정 </h2>
-    <form action="phrase_update.jsp" method="post" onsubmit="return input_check_func()">
-    <table border="1">
-        <tr>
-            <th> 명언 </th> <td> <input type="text" name="u_phrase" value="<%=u_phrase %>" ></td>
-        </tr>
-        <tr>
-            <th> 분야 </th> 
-	            <td> 
-		            <select id="u_category" name="u_category">
-			        	<option value="사랑">사랑</option>
-			        	<option value="노력">노력</option>
-			        	<option value="우정">우정</option>
-			        	<option value="자립">자립</option>
-			        	<option value="겸손">겸손</option>
-			        	<option value="인생">인생</option>
-			        	<option value="시간">시간</option>
-			        	<option value="양심">양심</option>
-			        	<option value="인륜">인륜</option>
-		        	</select>
-	            </td>
-        </tr>
-        <tr>
-            <th> 매체 </th> 
-	            <td> 
-	            <select id="u_media" name="u_media">
-			        	<option value="드라마">드라마</option>
-			        	<option value="영화">영화</option>
-			        	<option value="만화">만화</option>
-			        	<option value="노래">노래</option>
-			        	<option value="책">책</option>
-			        	<option value="인물">인물</option>
-			        	<option value="속담/사자성어">속담/사자성어</option>
-		        	</select> 
-	            </td>
-        </tr>
-        <tr>
-        	<th> 매체명 </th> <td> <input type="text" name="u_media_name" value="<%=u_media_name%>" ></td>
-        </tr>
-        <tr>
-        	<th> 화자 </th> <td><input type="text" name="u_sayer" value="<%=u_sayer%>" ></td>
-        </tr>
-        <tr>
-        	<th> 한줄평 </th> <td><input type="text" name="u_comment" value="<%=u_comment%>" ></td>
-        </tr>
-    </table>
-    <button> 수정하기 </button>
-    </form>
+	<h2 align="center"> 띵언 수정 </h2>
+	    <form action="phrase_update.jsp" method="post" onsubmit="return input_check_func()">
+		    <table border="1" style="margin: auto;">
+		        <tr>
+		            <th> 띵언 </th> <td> <input type="text" name="u_phrase" value="<%=u_phrase %>" ></td>
+		        </tr>
+		        <tr>
+		            <th> 분야 </th> 
+			            <td> 
+				            <select id="u_category" name="u_category">
+					        	<option value="사랑">사랑</option>
+					        	<option value="노력">노력</option>
+					        	<option value="우정">우정</option>
+					        	<option value="자립">자립</option>
+					        	<option value="겸손">겸손</option>
+					        	<option value="인생">인생</option>
+					        	<option value="시간">시간</option>
+					        	<option value="양심">양심</option>
+					        	<option value="인륜">인륜</option>
+				        	</select>
+			            </td>
+		        </tr>
+		        <tr>
+		            <th> 매체 </th> 
+			            <td> 
+			            <select id="u_media" name="u_media">
+					        	<option value="드라마">드라마</option>
+					        	<option value="영화">영화</option>
+					        	<option value="만화">만화</option>
+					        	<option value="노래">노래</option>
+					        	<option value="책">책</option>
+					        	<option value="인물">인물</option>
+					        	<option value="속담/사자성어">속담/사자성어</option>
+				        	</select> 
+			            </td>
+		        </tr>
+		        <tr>
+		        	<th> 매체명 </th> <td> <input type="text" name="u_media_name" value="<%=u_media_name%>"></td>
+		        </tr>
+		        <tr>
+		        	<th> 화자 </th> <td> <input type="text" name="u_sayer" value="<%=u_sayer%>" ></td>
+		        </tr>
+		        <tr>
+		        	<th> 한줄평 </th> <td> <input type="text" name="u_comment" value="<%=u_comment%>" ></td>
+		        </tr>
+		       
+		        <tr>
+	    			<td colspan="2"><input type="submit" value="수정하기" onClick="createPhraseBtn()" class="btn btn-primary" align="center" style="width: 100%;"></td>
+	    		</tr>
+		    </table>
+	    </form>
     
     <script>
 	function input_check_func(){
@@ -119,6 +123,12 @@
 			return true;
 		}
 	}
+	</script>
+	
+	<script>
+			function createPhraseBtn() {
+			  alert("명언이 수정되었습니다.")
+			}
 	</script>
 </body>
 </html>
