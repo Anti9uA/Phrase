@@ -6,9 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="meta_css.html" %>
 <title>Search</title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 	<h1> 검색 페이지 </h1>
 	<!-- @@@@@@@@@@@ 뒤로가기 버튼 @@@@@@@@@@@ -->
 	<button onClick="location.href='main.jsp'"> 메인으로.. </button> 
@@ -31,13 +33,8 @@
             
        <table width="80%" border="1">
        	<tr>
-       		<td> 명언 </td>
-       		<td> 사용자 </td>
-       		<td> 분야 </td>
-       		<td> 매체</td>
-       		<td> 매체명 </td>
        		<td> 인물 </td>
-       		<td> 한줄평 </td>
+       		<td> 명언 </td>
        	<tr>      
     
     <%
@@ -68,13 +65,22 @@
 			isSearch = true;
 		%> 
 		<tr>
-			<td> <%=rs.getString("phrase")%></td>
-			<td> <%=rs.getString("user_ID")%></td>
-			<td> <%=rs.getString("category")%></td>
-			<td> <%=rs.getString("media")%></td>
-			<td> <%=rs.getString("media_name")%></td>
-			<td> <%=rs.getString("sayer")%></td>
-			<td> <%=rs.getString("comment")%></td>
+			<td><%=rs.getString("sayer")%></td>
+			<td><%=rs.getString("phrase")%></td>
+			
+			
+			<td style="width: 100px;">
+				<button type="button" class="btn btn-info" style="width: 100%;"
+						data-toggle="popover" 
+						data-html="true" 
+						title="<%= rs.getString("phrase") %>" 
+						data-content="
+							분야: <%= rs.getString("category") %><br />
+							매체: <%= rs.getString("media") %><br />
+							매체명: <%= rs.getString("media_name") %><br />
+							한줄평: <%= rs.getString("comment") %><br />
+						">더보기</button>
+			</td>
 		</tr>
 		<%
 		}
@@ -85,5 +91,10 @@
 	%>
 	</table>
 	
+	<script>
+	$(function () {
+		  $('[data-toggle="popover"]').popover()
+		})
+	</script>
 </body>
 </html>

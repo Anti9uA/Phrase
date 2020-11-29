@@ -49,7 +49,7 @@
             <td colspan=2>
               <div align="center">
                 <input type="submit" class="btn btn-primary" name="Submit" value="로그인">
-                <input type="reset" class="btn btn-outline-primary" value="취소">
+                <a href="signup.jsp" class="btn btn-outline-primary">회원가입</a>
               </div>
             </td>
           </tr>

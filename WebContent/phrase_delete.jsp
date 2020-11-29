@@ -31,6 +31,12 @@
         String delete_query2 = "DELETE FROM source WHERE phrase = '" + delete_phrase + "'";
         st.executeUpdate(delete_query2);
         
+        %>
+        <script>
+        	alert("명언이 삭제 되었습니다!");
+        </script>
+        <%
+        
 		response.sendRedirect("main.jsp");
 		
 	} catch (Exception e) {

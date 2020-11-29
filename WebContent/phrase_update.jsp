@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>업데이트</title>
 </head>
 <body>
 	<%
@@ -17,6 +17,7 @@
 		String u_media_name = request.getParameter("u_media_name");
 		String u_sayer = request.getParameter("u_sayer");
 		String u_comment = request.getParameter("u_comment");
+		String u_share = request.getParameter("u_share");
 		
 		
 		String driver = "org.mariadb.jdbc.Driver";
@@ -27,13 +28,14 @@
 		String dbUser = "user1";
 		String dbPass = "1111";
 		Connection conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-		String update_phrase_query = "UPDATE phrase SET phrase=?, category=?, comment=? WHERE phrase=?";
+		String update_phrase_query = "UPDATE phrase SET phrase=?, category=?, comment=?, share=? WHERE phrase=?";
 		PreparedStatement pstmt = conn.prepareStatement(update_phrase_query);
 		
 		pstmt.setString(1, u_phrase);
 		pstmt.setString(2, u_category);
 		pstmt.setString(3, u_comment);
-		pstmt.setString(4, update_phrase);
+		pstmt.setString(4, u_share);
+		pstmt.setString(5, update_phrase);
 		pstmt.executeUpdate();
 		
 		String update_source_query = "UPDATE source SET phrase=?, media=?, sayer=?, media_name=? WHERE phrase=?";
@@ -46,6 +48,12 @@
 		pstmt2.setString(5, update_phrase);
 		pstmt2.executeUpdate();
 		
+		%>
+        <script>
+        	alert("명언이 수정 되었습니다!");
+        </script>
+        <%
+        
 		response.sendRedirect("main.jsp");
 		
 	} catch (Exception e) {

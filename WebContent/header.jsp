@@ -11,7 +11,7 @@
  %>
    
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="main.jsp">명언</a>
+  <a class="navbar-brand" href="main.jsp">오늘의 명언</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,7 +23,7 @@
      <% if (session_id != null) { %>
 	  	<span class="navbar-text"><%= session_id %>님 방문을 환영합니다.</span>
 	  <% } else { %>
-	    <span class="navbar-text">로그인한 후 사용하세요.</span>
+	    <span class="navbar-text">로그인 후 사용하세요! :)</span>
       <% } %>
   </div>
 </nav>

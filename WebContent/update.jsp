@@ -49,7 +49,7 @@
 		out.println("DB Connection Failed..");
 	}
 	%>
-	<h2 align="center"> 띵언 수정 </h2>
+	<h2 align="center"> 명언 수정 창 </h2>
 	    <form action="phrase_update.jsp" method="post" onsubmit="return input_check_func()">
 		    <table border="1" style="margin: auto;">
 		        <tr>
@@ -94,7 +94,15 @@
 		        <tr>
 		        	<th> 한줄평 </th> <td> <input type="text" name="u_comment" value="<%=u_comment%>" ></td>
 		        </tr>
-		       
+		       <tr>
+		        	<th> 공유 </th> 
+			        	<td> 
+			        		<select id="u_share" name="u_share">
+					        	<option value="yes">공유</option>
+					        	<option value="no">미공유</option>
+				        	</select> 
+			        	</td>
+			        </tr>
 		        <tr>
 	    			<td colspan="2"><input type="submit" value="수정하기" onClick="createPhraseBtn()" class="btn btn-primary" align="center" style="width: 100%;"></td>
 	    		</tr>

@@ -18,6 +18,7 @@
 		String add_mediaName = request.getParameter("add_mediaName");
 		String add_sayer = request.getParameter("add_sayer");
 		String add_comment = request.getParameter("add_comment");
+		String add_share = request.getParameter("add_share");
 		
 		String driver = "org.mariadb.jdbc.Driver";
 		Class.forName(driver);
@@ -34,7 +35,8 @@
                 "','" + add_category + 
                 "','" + add_ID +
                 "','" + add_comment +
-                "', 000, 'yes')"; 
+                "', 000,'" + add_share+ 
+                "')"; 
         st.executeUpdate(phrase_query);
         
         //------ source 테이블에 데이터 추가 (타임 스탬프, 매체 종류, 매체명, 화자) ------	
@@ -50,7 +52,6 @@
         //------ 한줄평을 작성 안한 경우 null 값이 들어가는걸 '없음'으로 수정해줌 ------	
         String update_null_query = "UPDATE phrase SET comment = '없음' WHERE comment = ' '";
         st.executeUpdate(update_null_query);
-        
         
 		response.sendRedirect("main.jsp");
 		
