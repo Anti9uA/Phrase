@@ -153,11 +153,11 @@
 		
 		<div class="col-6">
 			<!-- @@@@@@@@@@@ 명언 추가 창 @@@@@@@@@@@ -->
-			<h2 align="center"> 띵언 추가 </h2>
+			<h2 align="center"> 명언 추가 </h2>
 		    <form action="phrase_add.jsp" method="post" onsubmit="return input_check_func()">
 			    <table border="1" style="margin: auto;">
 			        <tr>
-			            <th> 띵언 </th> <td> <input id="add_phrase" name="add_phrase"> </td>
+			            <th> 명언 </th> <td> <input id="add_phrase" name="add_phrase"> </td>
 			        </tr>
 			        <tr>
 			            <th> 분야 </th> 
@@ -222,7 +222,6 @@
     <table width="100%" border="1">
        	<tr>
        		<td> 명언 </td>
-       		<td> 사용자 </td>
        		<td> 분야 </td>
        		<td> 매체</td>
        		<td> 매체명 </td>
@@ -256,7 +255,6 @@
         	%> 
     		<tr>
     			<td> <%=rs.getString("phrase")%></td>
-    			<td> <%=rs.getString("user_ID")%></td>
     			<td> <%=rs.getString("category")%></td>
     			<td> <%=rs.getString("media")%></td>
     			<td> <%=rs.getString("media_name")%></td>
