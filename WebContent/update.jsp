@@ -59,6 +59,7 @@
 		            <th> 분야 </th> 
 			            <td> 
 				            <select id="u_category" name="u_category">
+				            	<option value="공부">공부</option>
 					        	<option value="사랑">사랑</option>
 					        	<option value="노력">노력</option>
 					        	<option value="우정">우정</option>

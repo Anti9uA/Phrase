@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.sql.*" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <% String sender = (String)session.getAttribute("id"); %>
 <!DOCTYPE html>
 <html>
@@ -24,41 +25,48 @@
 		String dbPass = "1111";
 		Connection conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 		Statement st = conn.createStatement();
-		
+		boolean isCheck = false;
+        String result = null;
 		// ---- Secure coding to prevent sql injection ----
-		String check_query = "SELECT CASE WHEN phrase = ? AND sender = ? THEN 'no' ELSE 'yes' END AS result FROM ddabong";
+		String check_query = "SELECT if(phrase = ? AND sender = ?, 'no', 'yes') as result from ddabong WHERE phrase = ? AND receiver = ?";
 		PreparedStatement pstmt = conn.prepareStatement(check_query);
 		pstmt.setString(1, like_phrase);
 		pstmt.setString(2, sender);
+		pstmt.setString(3, like_phrase);
+		pstmt.setString(4, receiver);
 		ResultSet rs = pstmt.executeQuery();
 		// ------------------------------------------------
-		/* //------ phrase 테이블에 데이터 삭제 (타임 스탬프, 띵언, 분야, 사용자 아이디, 한줄평) ------	
-        String like_query = "SELECT CASE WHEN phrase = " + like_phrase + 
-        "AND sender = " + sender + " THEN 'no' ELSE 'yes' END AS result FROM ddabong"; */
 		if (rs.next()) {
-			String result = rs.getString("result");
-			if (result.equals("no")) {
-				%>
-		        <script>
-		        	alert("이미 따봉을 누른 명언입니다!");
-		        	history.go(-1);
-		        </script>
-		        <%
-			}
-			else {	
-				%>
-		        <script>
-		        	alert("따봉을 누르셨습니다!!");
-		        </script>
-		        <%
+			result = rs.getString("result");
+			if (result == "yes") {
 				String add_ddabong_query = "INSERT INTO ddabong values(now(),'"+ like_phrase +
 						"','" + sender + 
 						"','" + receiver +
 						"');";
 				st.executeUpdate(add_ddabong_query);
+				
+				String add_score_query = "UPDATE phrase set usr_like = usr_like + 1 WHERE phrase = '"+ like_phrase +"'";
+				st.executeUpdate(add_score_query);
+				isCheck = true;
+			}
+			else if (result == "no"){
+				isCheck = false;
 			}
 		}
-		response.sendRedirect("search.jsp");
+		else {
+			out.println(rs.next()+"null!!");
+			String add_ddabong_query2 = "INSERT INTO ddabong values(now(),'"+ like_phrase +
+					"','" + sender + 
+					"','" + receiver +
+					"');";
+			st.executeUpdate(add_ddabong_query2);
+			
+			String add_score_query = "UPDATE phrase set usr_like = usr_like + 1 WHERE phrase = '"+ like_phrase +"'";
+			st.executeUpdate(add_score_query);
+			isCheck = true;  
+		}
+		out.println(sender+", "+result+", "+receiver+", "+like_phrase);
+		response.sendRedirect("search.jsp?isCheck="+isCheck);
 		
 	} catch (Exception e) {
 		e.printStackTrace();

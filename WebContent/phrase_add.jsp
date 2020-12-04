@@ -53,6 +53,9 @@
         String update_null_query = "UPDATE phrase SET comment = '없음' WHERE comment = ' '";
         st.executeUpdate(update_null_query);
         
+        String add_score_query = "UPDATE phrase set usr_like = usr_like + 5 WHERE phrase = '"+ add_phrase +"'";
+		st.executeUpdate(add_score_query);
+		
 		response.sendRedirect("main.jsp");
 		
 	} catch (Exception e) {

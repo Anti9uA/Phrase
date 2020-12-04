@@ -70,22 +70,22 @@
 		        if (rs.next()){
 			        usr_MBTI = rs.getString("MBTI");
 			        if (usr_MBTI.equals("INTJ") || usr_MBTI.equals("INTP") || usr_MBTI.equals("ENTJ") || usr_MBTI.equals("ENTP")){
-			        	recommend = "SELECT phrase, sayer FROM phrase NATURAL JOIN source WHERE category = '시간' OR '노력' AND share = 'yes'order by rand() limit 1"; 
+			        	recommend = "SELECT phrase, sayer FROM phrase NATURAL JOIN source WHERE category = '시간' OR category = '노력' OR category = '공부' AND share = 'yes'order by rand() limit 1"; 
 				        rs2 = st.executeQuery(recommend);
 			        }
 			        
 			        else if (usr_MBTI.equals("INFJ") || usr_MBTI.equals("INFP") || usr_MBTI.equals("ENFJ") || usr_MBTI.equals("ENFP")){
-			        	recommend = "SELECT phrase, sayer FROM phrase NATURAL JOIN source WHERE category = '사랑' OR '우정' AND share = 'yes'order by rand() limit 1"; 
+			        	recommend = "SELECT phrase, sayer FROM phrase NATURAL JOIN source WHERE category = '사랑' OR category = '우정' OR category = '공부' AND share = 'yes'order by rand() limit 1"; 
 			        	rs2 = st.executeQuery(recommend);
 			        }
 			        
 			        else if (usr_MBTI.equals("ISTJ") || usr_MBTI.equals("ISFJ") || usr_MBTI.equals("ESTJ") || usr_MBTI.equals("ESFJ")){
-			        	recommend = "SELECT phrase, sayer FROM phrase NATURAL JOIN source WHERE category = '자립' OR '인생' AND share = 'yes'order by rand() limit 1"; 
+			        	recommend = "SELECT phrase, sayer FROM phrase NATURAL JOIN source WHERE category = '자립' OR category = '인생' OR category = '공부' AND share = 'yes'order by rand() limit 1"; 
 			        	rs2 = st.executeQuery(recommend);
 			        }
 			        
 			        else {
-			        	recommend = "SELECT phrase, sayer FROM phrase NATURAL JOIN source WHERE category = '겸손' OR '양심' OR '인륜' AND share = 'yes' order by rand() limit 1"; 
+			        	recommend = "SELECT phrase, sayer FROM phrase NATURAL JOIN source WHERE category = '겸손' OR category = '양심' OR category = '인륜' OR category = '공부' AND share = 'yes' order by rand() limit 1"; 
 			        	rs2 = st.executeQuery(recommend);
 			        }
 		        }
@@ -163,6 +163,7 @@
 			            <th> 분야 </th> 
 				            <td> 
 					            <select id="add_category" name="add_category">
+					            	<option value="공부">공부</option>
 						        	<option value="사랑">사랑</option>
 						        	<option value="노력">노력</option>
 						        	<option value="우정">우정</option>
@@ -221,6 +222,7 @@
     <h3 style="margin-top: 75px;"> 내가 추가한 명언 </h3>
     <table width="100%" border="1">
        	<tr>
+       		<td> 좋아요 </td>
        		<td> 명언 </td>
        		<td> 분야 </td>
        		<td> 매체</td>
@@ -241,7 +243,7 @@
 		Connection conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 		
 		Statement st = conn.createStatement();
-        String query = "select * from phrase NATURAL JOIN source where user_ID = '" + phrase_id + "'";
+        String query = "select * from phrase NATURAL JOIN source where user_ID = '" + phrase_id + "' order by usr_like DESC";
         ResultSet rs = st.executeQuery(query);
 		
         if (!rs.next()){
@@ -252,8 +254,10 @@
         }
         
         while (rs.next()){
+        	int like_count = rs.getInt("usr_like");
         	%> 
     		<tr>
+    			<td> <%=like_count - 5 %></td>
     			<td> <%=rs.getString("phrase")%></td>
     			<td> <%=rs.getString("category")%></td>
     			<td> <%=rs.getString("media")%></td>
@@ -262,7 +266,7 @@
     			<td> <%=rs.getString("comment")%></td>
     			<td>
     				<a href ="<%request.getContextPath(); %>
-    				phrase_delete.jsp?send_phrase=<%=rs.getString("phrase")%>">삭제</a>
+    				phrase_delete.jsp?send_phrase=<%=rs.getString("phrase")%>&send_ID=<%=rs.getString("user_ID")%>">삭제</a>
     			</td>
     			<td>
     				<a href ="<%request.getContextPath(); %>

@@ -33,6 +33,7 @@
             
        <table width="80%" border="1">
        	<tr>
+       		<td> 좋아요 </td>
        		<td> 인물 </td>
        		<td> 명언 </td>
        	<tr>      
@@ -54,7 +55,7 @@
 		// ---- Secure coding to prevent sql injection ----
 		String query = "Select * FROM phrase NATURAL JOIN source WHERE " 
 				+ search_cat + 
-                " = ? AND share = 'yes' order by " + search_cat;
+                " = ? AND share = 'yes' order by usr_like DESC";
 		PreparedStatement stmt = conn.prepareStatement(query);
 		stmt.setString(1, input_search);
         ResultSet rs = stmt.executeQuery();
@@ -63,8 +64,10 @@
 		Boolean isSearch = false;
 		while(rs.next()){
 			isSearch = true;
+			int like_count = rs.getInt("usr_like");
 		%> 
 		<tr>
+			<td><%=like_count - 5%></td>
 			<td><%=rs.getString("sayer")%></td>
 			<td><%=rs.getString("phrase")%></td>
 			
@@ -98,7 +101,17 @@
     }	
 	%>
 	</table>
-	
+	<script>
+	<% String isCheck = request.getParameter("isCheck"); %>
+	if(<%= isCheck %> !== null) {
+		if(<%= isCheck %>) {
+			alert("좋아요를 누르셨습니다!");
+			
+		} else {
+			alert("이미 좋아요를 누른 명언입니다!");
+		}
+	}
+	</script>
 	<script>
 	$(function () {
 		  $('[data-toggle="popover"]').popover()
