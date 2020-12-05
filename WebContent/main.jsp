@@ -45,6 +45,37 @@
 	  </div>
 	</div>
 	
+	<div align="right" class="mr-2 mt-2">
+		<%
+	try {
+		String driver = "org.mariadb.jdbc.Driver";
+		Class.forName(driver);
+		
+		String dbName = "project";
+		String jdbcDriver = "jdbc:mariadb://localhost:3306/" + dbName;
+		String dbUser = "user1";
+		String dbPass = "1111";
+		Connection conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+		Statement st = conn.createStatement();
+		
+     	// ---- Secure coding to prevent sql injection ----
+   		String sum_query = "SELECT SUM(usr_like) as total FROM phrase where user_ID = ?";
+   		PreparedStatement pstmt = conn.prepareStatement(sum_query);
+   		pstmt.setString(1, new_id);
+   		ResultSet rs = pstmt.executeQuery();
+     	// ------------------------------------------------
+     	
+     	while(rs.next()){
+     		%> 
+     		내 점수 :  <%=rs.getInt("total") %> point
+     		<% 
+     	}
+	} catch (Exception e) {
+		e.printStackTrace();
+		out.println("DB Connection Failed..");
+	}	
+	%>
+	</div>
 
 	<div class="today-phrase" style="text-align: center; margin-top: 100px;">
 		<h4>오늘의 명언</h4><br>

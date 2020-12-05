@@ -42,7 +42,6 @@
 	try {
 		String search_cat = request.getParameter("search_cat");
 		String input_search = request.getParameter("input_search");
-		
 		String driver = "org.mariadb.jdbc.Driver";
 		Class.forName(driver);
 		
@@ -51,16 +50,25 @@
 		String dbUser = "user1";
 		String dbPass = "1111";
 		Connection conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String query = " ";
 		// ---- Secure coding to prevent sql injection ----
-		String query = "Select * FROM phrase NATURAL JOIN source WHERE " 
-				+ search_cat + 
-                " = ? AND share = 'yes' order by usr_like DESC";
-		PreparedStatement stmt = conn.prepareStatement(query);
-		stmt.setString(1, input_search);
-        ResultSet rs = stmt.executeQuery();
-     	// ------------------------------------------------
+		if (search_cat == null) {
+			query = "SELECT * FROM phrase NATURAL JOIN source WHERE share = 'yes' order by usr_like DESC";
+			stmt = conn.prepareStatement(query);
+			rs = stmt.executeQuery();
+		}
+		else {
+			query = "Select * FROM phrase NATURAL JOIN source WHERE " 
+					+ search_cat + 
+	                " = ? AND share = 'yes' order by usr_like DESC";
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, input_search);
+			rs = stmt.executeQuery();
+		}
 		
+     	
 		Boolean isSearch = false;
 		while(rs.next()){
 			isSearch = true;
@@ -108,7 +116,7 @@
 			alert("좋아요를 누르셨습니다!");
 			
 		} else {
-			alert("이미 좋아요를 누른 명언입니다!");
+			alert("이미 좋아요를 누른 명언입니다");
 		}
 	}
 	</script>
